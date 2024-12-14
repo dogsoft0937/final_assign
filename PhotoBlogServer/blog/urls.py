@@ -17,4 +17,5 @@ urlpatterns = [
     path('post/<int:pk>/edit/', views.post_edit, name='post_edit'),
     path('api_root/', include(router.urls)),
     path('api-token-auth/', obtain_auth_token),
+    path('analysis/',views.congestion_analysis,name='congestion_analysis'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -11,7 +11,6 @@ class PostSerializer(serializers.HyperlinkedModelSerializer):
         
     def create(self, validated_data):
         print("Received Data:", validated_data)
-        
+        # 좌표값 파싱 제거 - views.py에서 처리
         post = Post.objects.create(**validated_data)
-        
         return post

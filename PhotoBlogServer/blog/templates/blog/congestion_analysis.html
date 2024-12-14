@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+<div class="congestion-dashboard">
+    <h2>실시간 혼잡도 현황</h2>
+    {% if current_congestion %}
+    <div class="current-status">
+        <h3>현재 상태</h3>
+        <p>인원: {{ current_congestion.person_count }}명</p>
+        <p>혼잡도: {{ current_congestion.congestion_level }}</p>
+        <p>측정 시간: {{ current_congestion.timestamp }}</p>
+    </div>
+    {% endif %}
+
+    <h3>시간대별 통계</h3>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>시간대</th>
+                <th>평균 인원</th>
+                <th>데이터 수</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stat in hourly_stats %}
+            <tr>
+                <td>{{ stat.hour }}시</td>
+                <td>{{ stat.avg_count|floatformat:1 }}명</td>
+                <td>{{ stat.total_records }}회</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
